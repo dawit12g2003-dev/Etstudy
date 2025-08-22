@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etstudy | Premium Academic Templates</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4A6FA5;
+            --primary-light: #6B8CBE;
+            --secondary: #FF6B6B;
+            --accent: #4ECDC4;
+            --dark: #2D3436;
+            --light: #F5F5F5;
+            --gray: #858585;
+            --light-gray: #E0E0E0;
+            --white: #FFFFFF;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            --shadow: 0 10px 30px rgba(74, 111, 165, 0.15);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Hidden Admin Access Button */
+        .admin-access {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+        }
+
+        .admin-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .admin-btn:hover {
+            transform: scale(1.1);
+            background: var(--primary-light);
+        }
+
+        /* Admin Login Modal */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .admin-modal h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .admin-form input {
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .admin-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .admin-form button:hover {
+            background: var(--primary-light);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100%;
+            background: var(--white);
+            z-index: 10000;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .admin-panel.open {
+            right: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .admin-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .admin-section {
+            margin-bottom: 25px;
+        }
+
+        .admin-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .admin-form-group {
+            margin-bottom: 15px;
+        }
+
+        .admin-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .admin-form-group input, .admin-form-group textarea, .admin-form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .admin-form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .admin-form-group input[type="file"] {
+            padding: 0.5rem;
+        }
+
+        .admin-save-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .admin-save-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .product-editor {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .product-editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .remove-product {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            background: var(--gradient);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--light);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(74, 111, 165, 0.2);
+        }
+
+        .product-img {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="none" width="100" height="100"/><path fill="%23FFFFFF" opacity="0.1" d="M0 0h100v100H0z"/></svg>');
+        }
+
+        .product-info {
+            padding: 1.8rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            margin-bottom: 1.5rem;
+            color: var(--gray);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            height: 80px;
+            width: 80px;
+            line-height: 80px;
+            background: var(--light);
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Payment Section */
+        .payment-section {
+            padding: 5rem 0;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .payment-option {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            width: 200px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            transform: translateY(-5px);
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            height: 70px;
+            width: 70px;
+            line-height: 70px;
+            background: var(--light);
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .payment-option h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-option p {
+            color: var(--gray);
+        }
+
+        /* M-Pesa specific styling */
+        .mpesa-icon {
+            background: linear-gradient(135deg, #FFC72C, #FFA500);
+            color: white;
+        }
+
+        /* Account details styling */
+        .account-details {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 12px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .account-details h3 {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .account-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .account-info {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .account-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .account-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .account-number {
+            font-family: monospace;
+            font-size: 1.1rem;
+            background: var(--white);
+            padding: 0.7rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+        }
+
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+            border-top: 2px solid var(--light-gray);
+        }
+
+        .checkout-form {
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo i {
+            margin-right: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1.5rem;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .product-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-option {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .admin-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    Etstudy
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Templates</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#payment">Payment</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li class="cart-icon" id="cartIcon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hidden Admin Access Button -->
+    <div class="admin-access">
+        <div class="admin-btn" id="adminAccessBtn">
+            <i class="fas fa-cog"></i>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="admin-modal" id="adminModal">
+        <div class="admin-modal-content">
+            <h2>Admin Login</h2>
+            <form class="admin-form" id="adminLoginForm">
+                <input type="password" id="adminPassword" placeholder="Enter Admin Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2>Etstudy Admin Panel</h2>
+            <button class="admin-close" id="adminCloseBtn">&times;</button>
+        </div>
+        
+        <div class="admin-section">
+            <h3>Hero Section</h3>
+            <div class="admin-form-group">
+                <label for="heroTitle">Main Title</label>
+                <input type="text" id="heroTitle" value="Design Your Academic Success">
+            </div>
+            <div class="admin-form-group">
+                <label for="heroDescription">Description</label>
+                <textarea id="heroDescription">Premium, beautifully crafted study templates to elevate your learning experience and maximize productivity.</textarea>
+            </div>
+            <button class="admin-save-btn" onclick="saveHeroContent()">Save Hero Content</button>
+        </div>
+        
+        <div class="admin-section">
+            <h3>Products</h3>
+            <div id="productEditors">
+                <!-- Product editors will be added here dynamically -->
+            </div>
+            <button class="admin-save-btn" onclick="addNewProduct()">Add New Product</button>
+            <button class="admin-save-btn" onclick="saveAllProducts()" style="background: var(--accent);">Save All Products</button>
+        </div>
+        
+        <div class="admin-section">
+            <h3>Contact Information</h3>
+            <div class="admin-form-group">
+                <label for="adminEmail">Email Address</label>
+                <input type="email" id="adminEmail" value="dawit12g2003@gmail.com">
+            </div>
+            <div class="admin-form-group">
+                <label for="adminPhone">Phone Number</label>
+                <input type="tel" id="adminPhone" value="+251912919140">
+            </div>
+            <button class="admin-save-btn" onclick="saveContactInfo()">Save Contact Info</button>
+        </div>
+        
+        <div class="admin-section">
+            <h3>Payment Accounts</h3>
+            <div class="admin-form-group">
+                <label for="cbeAccount">CBE Account Number</label>
+                <input type="text" id="cbeAccount" value="1000666843294">
+            </div>
+            <div class="admin-form-group">
+                <label for="telebirrAccount">Telebirr Account</label>
+                <input type="text" id="telebirrAccount" value="0912919140">
+            </div>
+            <div class="admin-form-group">
+                <label for="mpesaAccount">M-Pesa Account</label>
+                <input type="text" id="mpesaAccount" value="0709239140">
+            </div>
+            <button class="admin-save-btn" onclick="savePaymentAccounts()">Save Payment Accounts</button>
+        </div>
+
+        <div class="admin-section">
+            <h3>Email Settings</h3>
+            <div class="admin-form-group">
+                <label for="emailSubject">Default Email Subject</label>
+                <input type="text" id="emailSubject" value="Your Etstudy Template Download">
+            </div>
+            <div class="admin-form-group">
+                <label for="emailMessage">Default Email Message</label>
+                <textarea id="emailMessage">Thank you for your purchase! Please find your template attached to this email.</textarea>
+            </div>
+            <button class="admin-save-btn" onclick="saveEmailSettings()">Save Email Settings</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate" id="heroTitleElement">Design Your Academic Success</h1>
+                <p class="animate delay-1" id="heroDescElement">Premium, beautifully crafted study templates to elevate your learning experience and maximize productivity.</p>
+                <a href="#products" class="btn animate delay-2">Explore Templates</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title animate">Our Premium Templates</h2>
+            
+            <div class="category-filter animate delay-1">
+                <button class="filter-btn active" data-filter="all">All Templates</button>
+                <button class="filter-btn" data-filter="planner">Planners</button>
+                <button class="filter-btn" data-filter="notes">Note-taking</button>
+                <button class="filter-btn" data-filter="exam">Exam Prep</button>
+            </div>
+            
+            <div class="product-grid" id="productGrid">
+                <!-- Product cards will be added here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title animate">Why Choose Etstudy</h2>
+            <div class="features-grid">
+                <div class="feature-card animate delay-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Elegant Design</h3>
+                    <p>Beautifully crafted templates with attention to typography, spacing, and visual hierarchy.</p>
+                </div>
+
+                <div class="feature-card animate delay-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Fully Customizable</h3>
+                    <p>Easy to personalize templates that adapt to your specific study needs and preferences.</p>
+                </div>
+
+                <div class="feature-card animate delay-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3>Print & Digital Ready</h3>
+                    <p>Optimized for both digital use and high-quality printing with perfect formatting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="payment-section" id="payment">
+        <div class="container">
+            <h2 class="section-title animate">Payment Options</h2>
+            <p class="animate delay-1">We support convenient payment methods for seamless transactions</p>
+            <div class="payment-options">
+                <div class="payment-option animate delay-1">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Telebirr</h3>
+                    <p>Mobile Payment</p>
+                </div>
+
+                <div class="payment-option animate delay-2">
+                    <div class="payment-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>CBE Birr</h3>
+                    <p>Bank Transfer</p>
+                </div>
+
+                <div class="payment-option animate delay-3">
+                    <div class="payment-icon mpesa-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>M-Pesa</h3>
+                    <p>Mobile Money</p>
+                </div>
+            </div>
+
+            <!-- Account Details -->
+            <div class="account-details animate delay-2">
+                <h3>Our Account Details</h3>
+                <div class="account-info">
+                    <div class="account-item">
+                        <span class="account-label">Telebirr Account:</span>
+                        <span class="account-number" id="telebirrAccountElement">0912919140</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">M-Pesa Account:</span>
+                        <span class="account-number" id="mpesaAccountElement">0709239140</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">CBE Account Number:</span>
+                        <span class="account-number" id="cbeAccountElement">1000666843294</span>
+                    </div>
+                    <div class="account-item">
+                        <span class="account-label">Contact Phone:</span>
+                        <span class="account-number" id="contactPhoneElement">+251912919140</span>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; text-align: center; font-style: italic;">
+                    After payment, please send the receipt to <span id="contactEmailElement">dawit12g2003@gmail.com</span> with your order details.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-book-open"></i> Etstudy
+                </div>
+                <div class="footer-links">
+                    <a href="#">About Us</a>
+                    <a href="mailto:dawit12g2003@gmail.com">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">FAQ</a>
+                </div>
+                <p>Contact us: <a href="mailto:dawit12g2003@gmail.com" style="color: #4ECDC4;" id="footerEmailElement">dawit12g2003@gmail.com</a> | <a href="tel:+251912919140" style="color: #4ECDC4;" id="footerPhoneElement">+251912919140</a></p>
+                <p class="copyright">© 2023 Etstudy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Your Cart</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be added here dynamically -->
+                <p class="empty-cart-message">Your cart is empty</p>
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">ETB 0</span>
+            </div>
+            <button class="btn btn-secondary" id="checkoutBtn">Proceed to Checkout</button>
+            
+            <div class="checkout-form" id="checkoutForm" style="display: none;">
+                <h3>Checkout</h3>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod" required>
+                        <option value="">Select payment method</option>
+                        <option value="telebirr">Telebirr</option>
+                        <option value="cbebirr">CBE Birr</option>
+                        <option value="mpesa">M-Pesa</option>
+                    </select>
+                </div>
+                <div class="account-details" style="margin: 1.5rem 0;">
+                    <h4>Payment Instructions</h4>
+                    <p>Please send payment to the account below matching your selected payment method:</p>
+                    <div class="account-info">
+                        <div class="account-item">
+                            <span class="account-label">Telebirr:</span>
+                            <span class="account-number">0912919140</span>
+                        </div>
+                        <div class="account-item">
+                            <span class="account-label">M-Pesa:</span>
+                            <span class="account-number">0709239140</span>
+                        </div>
+                        <div class="account-item">
+                            <span class="account-label">CBE Account:</span>
+                            <span class="account-number">1000666843294</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-style: italic;">
+                        After payment, please send the receipt to dawit12g2003@gmail.com
+                    </p>
+                </div>
+                <button class="btn" id="completeOrderBtn">Complete Order</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Admin Panel Functionality
+        const adminPassword = "admin123"; // Change this to your preferred password
+        
+        // Sample product data
+        let products = [
+            {
+                id: 1,
+                name: "Study Planner Pro",
+                price: 149,
+                description: "Comprehensive study planner with time blocking, goal setting, and progress tracking features.",
+                category: "planner",
+                file: null
+            },
+            {
+                id: 2,
+                name: "Note-Taking Master",
+                price: 129,
+                description: "Cornell, outline, and mind mapping templates for effective note-taking and knowledge organization.",
+                category: "notes",
+                file: null
+            },
+            {
+                id: 3,
+                name: "Exam Preparation Kit",
+                price: 179,
+                description: "Flashcards, practice tests, and revision schedules for comprehensive exam preparation.",
+                category: "exam",
+                file: null
+            }
+        ];
+
+        // Email settings
+        let emailSettings = {
+            subject: "Your Etstudy Template Download",
+            message: "Thank you for your purchase! Please find your template attached to this email."
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            initAdminPanel();
+            updateCart();
+        });
+
+        // Render products to the page
+        function renderProducts() {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const delayClass = index < 3 ? `delay-${index + 1}` : '';
+                productGrid.innerHTML += `
+                    <div class="product-card animate ${delayClass}" data-category="${product.category}">
+                        <div class="product-img">
+                            <i class="fas fa-${getProductIcon(product.category)}"></i>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-price">ETB ${product.price}</p>
+                            <p class="product-description">${product.description}</p>
+                            <button class="btn add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">Add to Cart</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Reattach event listeners
+            attachAddToCartListeners();
+        }
+
+        // Get appropriate icon for product category
+        function getProductIcon(category) {
+            switch(category) {
+                case 'planner': return 'calendar-alt';
+                case 'notes': return 'sticky-note';
+                case 'exam': return 'chart-bar';
+                default: return 'file-alt';
+            }
+        }
+
+        // Initialize admin panel with product editors
+        function initAdminPanel() {
+            const productEditors = document.getElementById('productEditors');
+            productEditors.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                productEditors.innerHTML += `
+                    <div class="product-editor" data-id="${product.id}">
+                        <div class="product-editor-header">
+                            <h4>Product ${index + 1}</h4>
+                            <button class="remove-product" onclick="removeProduct(${product.id})">&times;</button>
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="productName${product.id}">Product Name</label>
+                            <input type="text" id="productName${product.id}" value="${product.name}">
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="productPrice${product.id}">Price (ETB)</label>
+                            <input type="number" id="productPrice${product.id}" value="${product.price}">
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="productDescription${product.id}">Description</label>
+                            <textarea id="productDescription${product.id}">${product.description}</textarea>
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="productCategory${product.id}">Category</label>
+                            <select id="productCategory${product.id}">
+                                <option value="planner" ${product.category === 'planner' ? 'selected' : ''}>Planner</option>
+                                <option value="notes" ${product.category === 'notes' ? 'selected' : ''}>Note-taking</option>
+                                <option value="exam" ${product.category === 'exam' ? 'selected' : ''}>Exam Prep</option>
+                            </select>
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="productFile${product.id}">Template File (PDF, Word, etc.)</label>
+                            <input type="file" id="productFile${product.id}" accept=".pdf,.doc,.docx">
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Add new product
+        function addNewProduct() {
+            const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+            const newProduct = {
+                id: newId,
+                name: "New Product",
+                price: 99,
+                description: "Product description",
+                category: "planner",
+                file: null
+            };
+            
+            products.push(newProduct);
+            initAdminPanel();
+            renderProducts();
+            showToast('New product added. Remember to save changes.');
+        }
+
+        // Remove product
+        function removeProduct(id) {
+            if (products.length <= 1) {
+                showToast('You must have at least one product.');
+                return;
+            }
+            
+            products = products.filter(product => product.id !== id);
+            initAdminPanel();
+            renderProducts();
+            showToast('Product removed. Remember to save changes.');
+        }
+
+        // Save all products
+        function saveAllProducts() {
+            products.forEach(product => {
+                const id = product.id;
+                product.name = document.getElementById(`productName${id}`).value;
+                product.price = parseInt(document.getElementById(`productPrice${id}`).value);
+                product.description = document.getElementById(`productDescription${id}`).value;
+                product.category = document.getElementById(`productCategory${id}`).value;
+                
+                // Handle file upload
+                const fileInput = document.getElementById(`productFile${id}`);
+                if (fileInput.files.length > 0) {
+                    product.file = fileInput.files[0];
+                    showToast(`File "${fileInput.files[0].name}" uploaded for ${product.name}`);
+                }
+            });
+            
+            renderProducts();
+            showToast('All products saved successfully!');
+        }
+
+        // Save hero content
+        function saveHeroContent() {
+            const title = document.getElementById('heroTitle').value;
+            const description = document.getElementById('heroDescription').value;
+            
+            document.getElementById('heroTitleElement').textContent = title;
+            document.getElementById('heroDescElement').textContent = description;
+            
+            showToast('Hero content updated successfully!');
+        }
+
+        // Save contact info
+        function saveContactInfo() {
+            const email = document.getElementById('adminEmail').value;
+            const phone = document.getElementById('adminPhone').value;
+            
+            document.getElementById('contactEmailElement').textContent = email;
+            document.getElementById('contactPhoneElement').textContent = phone;
+            document.getElementById('footerEmailElement').textContent = email;
+            document.getElementById('footerEmailElement').href = `mailto:${email}`;
+            document.getElementById('footerPhoneElement').textContent = phone;
+            document.getElementById('footerPhoneElement').href = `tel:${phone}`;
+            
+            showToast('Contact information updated successfully!');
+        }
+
+        // Save payment accounts
+        function savePaymentAccounts() {
+            const cbeAccount = document.getElementById('cbeAccount').value;
+            const telebirrAccount = document.getElementById('telebirrAccount').value;
+            const mpesaAccount = document.getElementById('mpesaAccount').value;
+            
+            document.getElementById('cbeAccountElement').textContent = cbeAccount;
+            document.getElementById('telebirrAccountElement').textContent = telebirrAccount;
+            document.getElementById('mpesaAccountElement').textContent = mpesaAccount;
+            
+            showToast('Payment accounts updated successfully!');
+        }
+
+        // Save email settings
+        function saveEmailSettings() {
+            emailSettings.subject = document.getElementById('emailSubject').value;
+            emailSettings.message = document.getElementById('emailMessage').value;
+            
+            showToast('Email settings updated successfully!');
+        }
+
+        // Admin access
+        document.getElementById('adminAccessBtn').addEventListener('click', function() {
+            document.getElementById('adminModal').style.display = 'flex';
+        });
+        
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === adminPassword) {
+                document.getElementById('adminModal').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('adminPanel').classList.add('open');
+                }, 10);
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        });
+        
+        document.getElementById('adminCloseBtn').addEventListener('click', function() {
+            document.getElementById('adminPanel').classList.remove('open');
+            setTimeout(() => {
+                document.getElementById('adminPanel').style.display = 'none';
+            }, 300);
+        });
+
+        // Cart functionality
+        let cart = [];
+        
+        function attachAddToCartListeners() {
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    
+                    // Check if product already in cart
+                    const existingItem = cart.find(item => item.id === id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            id,
+                            name,
+                            price,
+                            quantity: 1
+                        });
+                    }
+                    
+                    updateCart();
+                    showToast(`${name} added to cart!`);
+                    
+                    // Animation effect
+                    this.textContent = 'Added!';
+                    setTimeout(() => {
+                        this.textContent = 'Add to Cart';
+                    }, 1500);
+                });
+            });
+        }
+        
+        // Update cart UI
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Update cart items
+            const cartItems = document.getElementById('cartItems');
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart-message">Your cart is empty</p>';
+            } else {
+                cartItems.innerHTML = '';
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">ETB ${item.price} x ${item.quantity}</div>
+                        </div>
+                        <button class="cart-item-remove" data-id="${item.id}">&times;</button>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.cart-item-remove').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        removeFromCart(id);
+                    });
+                });
+            }
+            
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cartTotal').textContent = `ETB ${total}`;
+        }
+        
+        // Remove item from cart
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+            showToast('Item removed from cart');
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Open cart modal
+        document.getElementById('cartIcon').addEventListener('click', () => {
+            document.getElementById('cartModal').style.display = 'flex';
+        });
+        
+        // Close cart modal
+        document.querySelector('.close-modal').addEventListener('click', () => {
+            document.getElementById('cartModal').style.display = 'none';
+            document.getElementById('checkoutForm').style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('cartModal')) {
+                document.getElementById('cartModal').style.display = 'none';
+                document.getElementById('checkoutForm').style.display = 'none';
+            }
+        });
+        
+        // Proceed to checkout
+        document.getElementById('checkoutBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+            
+            document.getElementById('checkoutForm').style.display = 'block';
+        });
+        
+        // Complete order
+        document.getElementById('completeOrderBtn').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            
+            if (!name || !email || !phone || !paymentMethod) {
+                showToast('Please fill all fields');
+                return;
+            }
+            
+            // In a real application, you would process the order here
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Show payment instructions
+            let accountNumber = "";
+            switch(paymentMethod) {
+                case "telebirr":
+                    accountNumber = "0912919140";
+                    break;
+                case "mpesa":
+                    accountNumber = "0709239140";
+                    break;
+                case "cbebirr":
+                    accountNumber = "1000666843294";
+                    break;
+            }
+            
+            // Simulate email sending
+            showToast(`Order received! An email with download instructions will be sent to ${email}`);
+            
+            // Reset cart and form
+            cart = [];
+            updateCart();
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('cartModal').style.display = 'none';
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('paymentMethod').value = '';
+        });
+        
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // Show/hide products based on filter
+                productCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
